@@ -5,12 +5,8 @@ import uuid
 from .controllers.graph_controller import graph_controller
 
 @app.route('/', methods=['GET'])
-def abort():
-    # return abort(404, 'Internal server error teste')
-    # return 'teste'
-    # return Response('Erro teste', status=400)
-    # return abort(400)
-    abort(400)
+def init():
+    return 'Hello Python Graph API'
 
 @app.route('/create_session', methods=['GET'])
 def index():
