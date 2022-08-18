@@ -21,8 +21,12 @@ class Graph(BaseModel):
 
     def get_graph(self):
         static_path = get_static_path()
+        is_exists_static_dir = os.path.exists(static_path)
         is_exists_graph_dir = os.path.exists(Path(static_path, self.session_id))
         
+        if not is_exists_static_dir:
+            os.mkdir(static_path)
+
         if not is_exists_graph_dir:
             image_path = os.path.join(static_path, self.session_id)
             os.mkdir(image_path)
