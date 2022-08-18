@@ -1,4 +1,5 @@
-from flask import make_response, jsonify, abort
+from flask import abort
+from app.errors.validate_json_error import ValidateJsonError
 from ..models.graph import Graph
 
 def graph_controller(params):
@@ -8,10 +9,9 @@ def graph_controller(params):
     graph = Graph(raw_account=raw_account, session_id=session_id)
 
     try:
-        validate = graph.validate_params(params)
-        print(validate)
-
-        if not validate:
-            raise Exception('Custom Error')
+        graph.validate_params(params)
+        return graph.get_graph()
+    except ValidateJsonError:
+        abort(500, 'JSON Schema is not valid')
     except:
-        abort(400, 'Internal server error')   
+        abort(500, 'Unknown error')
