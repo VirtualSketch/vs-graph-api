@@ -1,7 +1,7 @@
 import re
 
-# Return the resolution steps for the equation
-def resolution_steps(equation):
+# Return the solving steps for the equation
+def equation_steps(equation):
     steps = []
     # Iterates based on the range of x axis
     for xaxis in range(-3, 3+1):
