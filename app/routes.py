@@ -1,7 +1,7 @@
 from flask import make_response, jsonify, request, Response
 from app import app
 import uuid
-from app.controllers.account_controller import account_controller
+from app.controllers.expression_controller import expression_controller
 
 from app.controllers.kill_session_controller import kill_session_controller
 
@@ -21,11 +21,11 @@ def get_graph():
     graph_path = graph_controller(params)
     return make_response(jsonify({ 'graph_image_url': graph_path }), 200)
 
-@app.route('/api/get_resolved-account', methods=['POST'])
-def get_resolved_account():
+@app.route('/api/get_equation', methods=['POST'])
+def get_equation():
     params = request.get_json()
-    resolved_account = account_controller(params)
-    return make_response(jsonify({ 'resolved_account': resolved_account }), 200)
+    equation = expression_controller(params)
+    return make_response(jsonify({ 'equation': equation }), 200)
 
 @app.route('/api/kill_session/<session_id>', methods=['GET'])
 def kill_session(session_id):
