@@ -7,16 +7,16 @@ from pathlib import Path
 from .base_model import BaseModel
 
 class Graph(BaseModel):
-    def __init__(self, session_id, raw_account) -> None:
-        super().__init__(session_id, raw_account)
+    def __init__(self, session_id, raw_expression) -> None:
+        super().__init__(session_id, raw_expression)
     
     _graph_params_schema = {
         "type": "object",
         "properties": {
             "session_id": {"type": "string"},
-            "raw_account": {"type": "string"},
+            "raw_expression": {"type": "string"},
             },
-        "required": ["session_id", "raw_account"]
+        "required": ["session_id", "raw_expression"]
     }
 
     def get_graph(self):

@@ -3,10 +3,10 @@ from app.errors.validate_json_error import ValidateJsonError
 from ..models.graph import Graph
 
 def graph_controller(params):
-    raw_account = params.get('raw_account')
+    raw_expression = params.get('raw_expression')
     session_id = params.get('session_id')
 
-    graph = Graph(raw_account=raw_account, session_id=session_id)
+    graph = Graph(raw_expression=raw_expression, session_id=session_id)
 
     try:
         graph.validate_params(params)
