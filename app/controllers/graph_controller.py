@@ -5,8 +5,9 @@ from ..models.graph import Graph
 def graph_controller(params):
     raw_expression = params.get('raw_expression')
     session_id = params.get('session_id')
+    graph_color = params.get('graph_color')
 
-    graph = Graph(raw_expression=raw_expression, session_id=session_id)
+    graph = Graph(raw_expression=raw_expression, session_id=session_id, graph_color=graph_color)
 
     try:
         graph.validate_params(params)
