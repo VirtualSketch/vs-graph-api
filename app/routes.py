@@ -1,6 +1,7 @@
 from flask import make_response, jsonify, request, Response
 from app import app
 import uuid
+from app.controllers.clear_controller import clear_controller
 from app.controllers.expression_controller import expression_controller
 
 from app.controllers.kill_session_controller import kill_session_controller
@@ -30,6 +31,11 @@ def get_equation():
 @app.route('/api/kill_session/<session_id>', methods=['GET'])
 def kill_session(session_id):
     kill_session_controller(session_id)
+    return Response('Directory deleted successfully', status=200)
+
+@app.route('/api/clean', methods=['GET'])
+def clear():
+    clear_controller()
     return Response('Directory deleted successfully', status=200)
 
 @app.errorhandler(500)
