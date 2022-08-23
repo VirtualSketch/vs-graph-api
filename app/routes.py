@@ -33,7 +33,7 @@ def kill_session(session_id):
     kill_session_controller(session_id)
     return Response('Directory deleted successfully', status=200)
 
-@app.route('/api/clear', methods=['GET'])
+@app.route('/api/clean', methods=['GET'])
 def clear():
     clear_controller()
     return Response('Directory deleted successfully', status=200)
