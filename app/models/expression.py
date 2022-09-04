@@ -3,8 +3,7 @@ from .base_model import BaseModel
 
 class Expression(BaseModel):
     def __init__(self, raw_expression) -> None:
-        session_id = ''
-        super().__init__(session_id, raw_expression)
+        super().__init__(raw_expression)
     
     _graph_params_schema = {
         "type": "object",
