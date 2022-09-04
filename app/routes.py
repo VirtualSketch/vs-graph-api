@@ -1,4 +1,4 @@
-from flask import make_response, jsonify, request, Response
+from flask import make_response, jsonify, request, Response, send_from_directory
 from app import app
 import uuid
 from app.controllers.clear_controller import clear_controller
@@ -32,6 +32,11 @@ def get_equation():
 def kill_session(session_id):
     kill_session_controller(session_id)
     return Response('Directory deleted successfully', status=200)
+
+@app.route('/static/<path:path>')
+def static_dir(path):
+    return send_from_directory('static', path)
+
 
 @app.route('/api/clean', methods=['GET'])
 def clear():
