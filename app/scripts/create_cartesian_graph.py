@@ -1,5 +1,7 @@
+import base64
 import matplotlib.pyplot as pyplot
 import numpy as np
+import io
 
 # Defining the function that will generate the graph
 def simple_degree_graph(fileName, path, equation, color): # The parameters to define the graph's file name, its path, the equation and its color    
@@ -39,5 +41,14 @@ def simple_degree_graph(fileName, path, equation, color): # The parameters to de
     # Generating the graph
     pyplot.plot(x,y, color='#8075FF', linewidth=2.5)
     
-    # Saving the graph
-    pyplot.savefig(f'{path}/{fileName}.png', transparent=True)
+    # Returns the graph in base64 
+
+    graph_stringIObytes = io.BytesIO()
+    
+    pyplot.savefig(graph_stringIObytes, format='png', transparent=True)
+    graph_stringIObytes.seek(0)
+    
+    graph_base64_data = base64.b64encode(graph_stringIObytes.read()).decode('utf-8')
+    
+    return graph_base64_data
+
