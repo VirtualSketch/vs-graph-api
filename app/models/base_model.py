@@ -1,10 +1,8 @@
 from app.errors.validate_json_error import ValidateJsonError
-from app.utils.get_static_path import get_static_path
 from ..utils.validate_json import validate_json
 
 class BaseModel:
-    def __init__(self, session_id, raw_expression):
-        self.session_id = session_id
+    def __init__(self, raw_expression):
         self.raw_expression = raw_expression
 
     def validate_params(self, json_data, json_schema):
