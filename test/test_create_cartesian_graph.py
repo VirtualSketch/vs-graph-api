@@ -1,32 +1,42 @@
-from sre_compile import isstring
 import pytest
+from sre_compile import isstring
 import base64
-
 from app.scripts.create_cartesian_graph import simple_degree_graph
 
-@pytest.mark.parametrize("fileName, path, equation, color", 
+#Defining parameters of the test
+@pytest.mark.parametrize("equation, color", 
 [
 #First degree expression
-("test", "./test", "5 * x + 7", "#000"), 
-("test2", "./test", "2 * x + 2", "#fff"),
-("test3", "./test", "- 2 * x + 5", "#000"),
-("test4", "./test", "2 * x + 4", "#fff"),
-("test5", "./test", "- 3 * x + 5", "#000"),
-("test6", "./test", "- 4 * x + 2", "#fff"),
+("5 * x + 7", "#000"), 
+("2 * x + 2", "#fff"),
+("- 2 * x + 5", "#000"),
+("2 * x + 4", "#fff"),
+("- 3 * x + 5", "#000"),
+("- 4 * x + 2", "#fff"),
 #Second degree expression
-("test7", "./test", "2 * x ** 2 * 2 + 1", "#000"), 
-("test8", "./test", "- x ** 2 - 2 * x - 3", "#fff"),
-("test9", "./test", "x ** 2 - 2 * x", "#000"),
-("test10", "./test", "- x ** 2 + 5 * x + 6", "#fff"),
-("test11", "./test", "- x ** 2 - 1", "#000"),
-("test12", "./test", "- 4 * x ** 2 + 4", "#fff")
+("2 * x ** 2 * 2 + 1", "#000"), 
+("- x ** 2 - 2 * x - 3", "#fff"),
+("x ** 2 - 2 * x", "#000"),
+("- x ** 2 + 5 * x + 6", "#fff"),
+("- x ** 2 - 1", "#000"),
+("- 4 * x ** 2 + 4", "#fff")
 ])
 
-def test_graph(fileName, path, equation, color):
-    graph = simple_degree_graph(fileName, path, equation, color)
+#Defining the test
+def test_graph(equation, color):
+    #Sending the parameter to the function
+    graph = simple_degree_graph(equation, color)
+    #Verifying if the return of the function is a string
     if (isstring(graph) == True):
+        #If it is a string continue the test
         try:
+            #Verify if the return of the function is also a base64
             base64.b64decode(graph)
+            #If it is a base64, pass the test
             assert True
         except:
+            #If is not a base64 the test will fail
             assert False
+    else:
+        #If is not a string the test will fail
+        assert False

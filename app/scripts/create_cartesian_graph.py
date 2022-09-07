@@ -4,7 +4,7 @@ import numpy as np
 import io
 
 # Defining the function that will generate the graph
-def simple_degree_graph(fileName, path, equation, color): # The parameters to define the graph's file name, its path, the equation and its color    
+def simple_degree_graph(equation, color): # The parameters to define the graph's file name, its path, the equation and its color    
     # Calculating the x and y to generate the graph
     x = np.linspace(-16, 16, 1000)
     y = eval(equation)
