@@ -15,22 +15,18 @@ from app.controllers.graph_controller import graph_controller
 ({"raw_expression": "- x ** 2 - 2 * x - 3", "graph_color": "#fff"})
 ])
 
-#Definig the test
+#Test definition
 def test_graph_controller(parameter):
-    #Sending the parameter to the function
+    #Sending the parameter to the function and proceed further if it is a string
     graph = graph_controller(parameter)
-    #If it is a string continue to the try
     if (isstring(graph) == True):
         try:
-            #Verify if the return of the function is also a base64
+            #Testing if the return of the function is encoded in base64
             base64.b64decode(graph)
-            #If it is a base64 pass the test
             assert True
         except:
-            #If is not a base64 the test will fail
             assert False
     else:
-        #If is not a string the test will fail
         assert False
 
 #Defining the parameters to test
@@ -42,24 +38,17 @@ def test_graph_controller(parameter):
 ({"raw_expression": "k ** 2 - 4 * t - 12", "graph_color": "#fff"}),
 ({"raw_expression": "k ** 2 - 4 * t - 12", "graph_color": "#/*"})])
 
+#Test definition
 def test_graph_controller_error(errors):
     try:
-        #Passing the parameters to the function
+        # The function graph_controller needs to throw an error, otherwise fail the test
         graph_controller(errors)
-        #The functions in this test will throw a error, so if the function return something that is not a error, the test will fail
         assert False
     #Catch the exception and give a name to it
     except Exception as error:
-        #Transfoming the error into a string
         getErrorMessage = str(error)
-        if(getErrorMessage == '500 Internal Server Error: JSON Schema is not valid'):
-            #Print the error in the console if the message is equal to "500 Internal Server Error: JSON Schema is not valid"
+        # If it is one of the expected exceptions, print the error's message and pass the test
+        if(getErrorMessage == '500 Internal Server Error: JSON Schema is not valid' or getErrorMessage == '500 Internal Server Error: Unknown error'):
             print(getErrorMessage)
-            #Pass the test
-            assert True
-        elif(getErrorMessage == '500 Internal Server Error: Unknown error'):
-            #Print the error in the console if the message is equal to "500 Internal Server Error: Unknown error"
-            print(getErrorMessage)
-            #Pass the test
             assert True
             
