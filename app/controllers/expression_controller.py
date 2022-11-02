@@ -8,10 +8,15 @@ import re
 def expression_controller(params):
     raw_expression = params.get('raw_expression')
 
-    result = re.search(r"([a-z])(\d)", raw_expression)
+    has_letter_after_digit = re.search(r"(\d)[a-z]", raw_expression)
 
-    if result is not None:
-        raw_expression = re.sub(r"[a-z]\d", result.group(1) + " ** " + result.group(2), raw_expression)
+    if has_letter_after_digit is not None:
+        raw_expression = re.sub(r"\d[a-z]", has_letter_after_digit.group(1) + " * " + has_letter_after_digit.group(2), raw_expression)
+
+    has_square = re.search(r"([a-z])(\d)", raw_expression)
+
+    if has_square is not None:
+        raw_expression = re.sub(r"[a-z]\d", has_square.group(1) + " ** " + has_square.group(2), raw_expression)
 
     expression = Expression(raw_expression=raw_expression)
 
