@@ -8,7 +8,7 @@ import re
 def expression_controller(params):
     raw_expression = params.get('raw_expression')
 
-    has_letter_after_digit = re.search(r"(\d)[a-z]", raw_expression)
+    has_letter_after_digit = re.search(r"(\d)([a-z])", raw_expression)
 
     if has_letter_after_digit is not None:
         raw_expression = re.sub(r"\d[a-z]", has_letter_after_digit.group(1) + " * " + has_letter_after_digit.group(2), raw_expression)
